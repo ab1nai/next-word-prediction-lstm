@@ -97,7 +97,7 @@ uploaded = files.upload()
 ```
 
 👉 **Open in Colab:**  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abinairv/next-word-prediction-lstm/blob/main/colab_notebook.ipynb)
+[![Open In Colab]([https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abinairv/next-word-prediction-lstm/blob/main/colab_notebook.ipynb](https://colab.research.google.com/drive/1PeiOxja3ESl_KANscnQZoBs7W3ztCbw5?usp=sharing))
 
 ---
 
