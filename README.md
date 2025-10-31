@@ -1,170 +1,71 @@
-# 🧠 Next Word Prediction using LSTM-Based Neural Networks
+text predictor
 
-This project implements a **Next Word Prediction** model using a **Long Short-Term Memory (LSTM)** neural network.  
-It learns to predict the next word in a sequence based on previous context, enabling applications such as predictive typing and text completion.
+heyyy, 
+this is a small side project i built to explore how a language model can learn to predict the next word in a sentence.
 
----
-
-## 🚀 Overview
-
-This project demonstrates how **LSTM models** can learn long-term dependencies in natural language data.  
-The model is trained on an English text corpus and evaluated using **accuracy, loss**, and **perplexity** metrics.
-
-Key highlights:
-- Built using **Python, TensorFlow, and Keras**
-- Trained in **Google Colab** with GPU acceleration
-- Token-based dataset for efficient training
-- Visualized training performance (accuracy & loss)
-- Predicts contextually relevant next words
+it’s a single python file (`text_predictor.py`) that can train its own model and then let you test it interactively right in your terminal.
 
 ---
 
-## 📁 Repository Contents
+what does it do?
 
-```
-next-word-prediction-lstm/
-│
-├── word_predictor.py                # Main training & prediction script
-├── dataset.tokens                   # Tokenized English text corpus (Git LFS)
-├── report.pdf                       # IEEE-format project report
-├── presentation.pdf                 # Presentation slides
-├── .gitattributes                   # Git LFS configuration
-└── README.md                        # Project documentation
-```
+- learns to predict the next word from a text dataset  
+- uses **word embeddings** + **POS tags** as inputs  
+- optionally supports **GloVe** pretrained vectors  
+- built with TensorFlow and NLTK  
+- runs fine on **CPU-only** setups  
 
 ---
 
-## 🧠 Model Architecture
+setup!!
 
-| Layer | Description |
-|-------|--------------|
-| **Embedding** | Converts tokens into dense 100D vectors |
-| **LSTM (128 units)** | Captures sequential dependencies |
-| **Dense Softmax** | Outputs probability distribution for next word |
+you’ll need Python 3.8+ and a few dependencies:
 
-**Optimizer:** RMSProp  
-**Loss:** Sparse Categorical Crossentropy  
-**Batch Size:** 128  
-**Epochs:** 5  
+    pip install tensorflow numpy nltk
 
----
+the script will automatically download a few NLTK resources the first time it runs:
+- punkt  
+- stopwords  
+- averaged_perceptron_tagger  
 
-## 📊 Training Results
-
-| Metric | Description |
-|---------|--------------|
-| **Training Accuracy** | Increases steadily per epoch |
-| **Validation Accuracy** | Follows training closely |
-| **Loss** | Decreases smoothly, minimal overfitting |
-| **Perplexity** | Confirms effective language modeling |
+make sure your dataset is a plain-text file (like `datasetsh.txt`) that contains enough English sentences for training.
 
 ---
 
-### 📈 Example Graphs
+how to use?
 
-Add your plots here:
+### train the model
 
-- `accuracy_plot.png`
-- `loss_plot.png`
-- `perplexity_plot.png`
+    python text_predictor.py --mode train
 
----
+this will:
+- read your dataset  
+- build a tokenizer and POS-tag map  
+- train a GRU-based language model  
+- save it as `text_predictor_model.keras`
 
-## 💬 Sample Predictions
+you can tweak things like epochs, batch size, or embeddings inside the config at the top of the file.
 
-| Input | Predicted Next Words |
-|--------|----------------------|
-| `the quick brown fox` | `jumps`, `runs`, `leaps` |
-| `deep learning models are` | `powerful`, `complex`, `effective` |
+### predict interactively
 
----
+once trained, you can run:
 
-## 💻 Run the Project in Google Colab
+    python text_predictor.py --mode predict
 
-You can run the full workflow in Colab.
+then just type something like:
 
-1. Open a new Colab notebook  
-2. Upload:
-   - `word_predictor.py`
-   - `dataset.tokens`
-3. Paste and run this setup:
+    Your text: the world is
+    Next word predictions: ['beautiful', 'changing', 'mine', 'huge', 'vast']
 
-```python
-!pip install tensorflow numpy matplotlib
-from google.colab import files
-uploaded = files.upload()
-!python word_predictor.py
-```
-
-👉 **Open in Colab:**  
-[![Open In Colab]([https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abinairv/next-word-prediction-lstm/blob/main/colab_notebook.ipynb](https://colab.research.google.com/drive/1PeiOxja3ESl_KANscnQZoBs7W3ztCbw5?usp=sharing))
+type `exit` or `quit` to leave.
 
 ---
 
-## ⚙️ Dependencies
-
-Install locally:
-```bash
-pip install tensorflow numpy matplotlib
-```
+pls note :
+- the default setup works on CPU.  
+- if you have GloVe embeddings, place them in the project folder and keep the same path as in the config.  
+- you can expand the script later for sentence-level prediction or text generation.  
 
 ---
 
-## 🧮 Evaluation Metric — Perplexity
-
-Perplexity measures prediction uncertainty:
-
-\[
-Perplexity = e^{H(p)}
-\]
-
-Lower values = better next-word prediction.
-
----
-
-## 📦 Output Files
-
-| File | Purpose |
-|------|----------|
-| `next_word_model_tokens.h5` | Trained model weights |
-| `tokenizer_tokens.pickle` | Vocabulary tokenizer |
-| `accuracy_plot.png` | Accuracy curve |
-| `loss_plot.png` | Loss curve |
-| `perplexity_plot.png` | Perplexity chart |
-
----
-
-## 🏫 Author Information
-
-**Author:** Abhinay R V  
-**Department:** Computer Science  
-**Institution:** [Your University Name]  
-**Email:** abhinayyy.rv@gmail.com  
-
----
-
-## 🙏 Acknowledgments
-
-- **Google Colab** — GPU compute resources  
-- **TensorFlow/Keras** — Deep learning framework  
-- **Faculty Supervisor** — Academic guidance  
-- **Open English Text Corpora** — Dataset sources  
-
----
-
-## 🧾 License
-
-Licensed under the **MIT License** — free to use, modify, and distribute with attribution.
-
----
-
-## ⭐ Final Thoughts
-
-This project highlights how **LSTM networks** remain effective for sequence modeling and next-word prediction, even with moderate datasets and limited computational resources.
-
-> “Predicting the next word isn’t guessing — it’s understanding context.”
-
----
-
-📍 **GitHub Repository:** [https://github.com/abinairv/next-word-prediction-lstm](https://github.com/abinairv/next-word-prediction-lstm)  
-🕒 **Last Updated:** October 2025
+**— nai © 2025**
